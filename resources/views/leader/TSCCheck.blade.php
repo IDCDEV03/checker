@@ -22,7 +22,7 @@
                             $sql_car = DB::table('tran_sport_data')->where('id', '=', $ts_id)->get();
                         @endphp
 
-                        <form action="{{ route('leader_ChkInsert', ['form_id' => request()->form_id]) }}" method="post"
+                        <form action="{{ route('leader_ChkInsert', ['form_id' => request()->form_id,'ts'=>request()->ts]) }}" method="post"
                             name="form2">
                             @csrf
 
@@ -39,14 +39,14 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-2 form-label">ทะเบียนหัว :</label>
                                 <div class="col-sm-6">
-                                <input type="text" class="form-control" id="plate_top" >
+                                <input type="text" class="form-control" id="plate_top" name="plate_top" >
                               </div>
                             </div>
 
                             <div class="mb-3 row">
                                 <label class="col-sm-2 form-label">ทะเบียนหาง :</label>
                                 <div class="col-sm-6">
-                                <input type="text" class="form-control" id="plate_bottom" >
+                                <input type="text" class="form-control" id="plate_bottom" name="plate_bottom">
                               </div>
                             </div>
 
@@ -124,26 +124,14 @@
                                             <input type="number" class="form-control" name="user_chk[{{ $n++ }}]" >
                                            
                                         </td>
-                                           @elseif ($row2->choice_type == '5')
-                                           <td>
-                                               <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
-
-                                               <select name="user_chk[{{ $n++ }}]"
-                                                    class="form-select " >
-                                                    <option value="1" class="text-success" selected>☑ ผ่าน
-                                                    </option>
-                                                    <option value="0" class="text-danger">☒ ไม่ผ่าน</option>                                                      
-                                                </select>
-
-                                           </td>
+                                         
                                            @elseif ($row2->choice_type == '6')
                                            <td>
                                                <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
 
                                                <select name="user_chk[{{ $n++ }}]" class="form-select" >
-                                                    <option value="น้ำมัน" >น้ำมัน
-                                                    </option>
-                                                    <option value="NGV" >NGV</option>                                                      
+                                                    <option value="น้ำมัน" >น้ำมัน </option>
+                                                    <option value="NGV" >NGV</option>       
                                                 </select>
 
                                            </td>
@@ -168,6 +156,18 @@
                                         </tr>
                                     @endforeach
                                 @endforeach
+                                <tr>
+                                    <td align="center" colspan="2"> สรุปผลการตรวจ </td>
+                                    <td colspan="2">
+                                     
+                                        <select name="final_chk"  class="form-select " >
+                                             <option value="1" class="text-success" selected>☑ ผ่าน
+                                             </option>
+                                             <option value="0" class="text-danger">☒ ไม่ผ่าน</option>                                                      
+                                         </select>
+
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

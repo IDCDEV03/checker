@@ -153,7 +153,7 @@ Route::prefix('leader')->group(function(){
 
     Route::get('/lead',[LeaderController::class, 'index'])->name('leader_index'); 
     Route::get('/frmchk/{form_id}/{type}',[LeaderController::class, 'NewChk'])->name('leader_FormChk');
-    Route::post('/chkinsert/{form_id}',[LeaderController::class, 'ChkInsert'])->name('leader_ChkInsert');
+    Route::post('/chkinsert/{form_id}/{ts}',[LeaderController::class, 'ChkInsert'])->name('leader_ChkInsert');
     Route::get('/listform/{form_id}/{type}',[LeaderController::class, 'ListForm'])->name('leader_listform');
 
     Route::get('/chkdetail/{round}/{type}',[LeaderController::class, 'DetailChk'])->name('leader_detailchk');

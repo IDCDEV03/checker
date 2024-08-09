@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
+use function Laravel\Prompts\select;
+
 class LeaderConfigController extends Controller
 {
     public function __construct()
@@ -35,7 +37,14 @@ class LeaderConfigController extends Controller
         ->where('id', '=', $id)
         ->get();
 
-        return view('leader.TSCPlate',['id'=>$id], compact('ts_detail'));
+        $chk_truck = DB::table('truck_data_chks')
+        ->selectRaw('*, sum(chk_num) as sum_chk')
+        ->groupBy('plate_top')
+        ->orderBy('id', 'DESC')
+        ->where('ts_agent','=',$id)
+        ->get();
+
+        return view('leader.TSCPlate',['id'=>$id], compact('ts_detail','chk_truck'));
     }
 
     public function TypeChk ($id,$ts)
