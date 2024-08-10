@@ -74,7 +74,7 @@
                             <label for="course" class="col-md-4 col-form-label text-md-end">เบอร์โทร</label>
                             <div class="col-md-6">
                               
-                             <input id="phone" type="text" class="form-control" name="phone"  >
+                             <input id="phone" type="text" class="form-control" name="ts_phone"  >
                               
                             </div>
                         </div>

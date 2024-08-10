@@ -166,7 +166,7 @@ Route::prefix('leader')->group(function(){
 
    Route::get('/tscchk/{form_id}/{ts}',[LeaderConfigController::class, 'TSCChk'])->name('leader_TSCChk');
 
-   Route::get('/TSCDetail/{plate}',[LeaderConfigController::class, 'TSCDetail'])->name('leader_TSCDetail');
+   Route::get('/TSCDetail/{round}',[LeaderConfigController::class, 'TSCDetail'])->name('leader_TSCDetail');
 
 })->middleware(['auth','role:leader']);
 

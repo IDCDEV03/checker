@@ -27,6 +27,7 @@ class LeaderController extends Controller
         $user_detail = DB::table('user_details')
             ->where('user_id', '=', $user_id)
             ->get();
+  
 
         $form_list = DB::table('agent_form_lists')
             ->join('form_chks', 'agent_form_lists.form_id', '=', 'form_chks.form_id')
@@ -67,6 +68,7 @@ class LeaderController extends Controller
             'form_chk' => $form_id,
             'plate_top' => $request->plate_top,
             'plate_bottom' => $request->plate_bottom,
+            'form_types' => $request->form_type,
             'status_chk' => $request->final_chk,
             'round_chk' => $round,
             'created_at' => Carbon::now()

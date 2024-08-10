@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>TZ Checker</title>
+    <title>E-Checker By ID Drives</title>
 
     <!-- Fonts -->
     <link rel= "stylesheet"
@@ -30,7 +30,48 @@
         <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #45474B;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/insee.png') }}" alt="..." height="30px">
+                 @if (Auth::user()->role == 'company')
+@php
+$agent_id = Auth::user()->user_id;
+$company_logo = DB::table('user_details')                            
+    ->where('user_details.user_id', '=', $agent_id)
+    ->get();
+@endphp
+@foreach ($company_logo as $data)
+    @if ($data->user_logo != '0')
+    <img src="{{ asset($data->user_logo) }}" alt="..." height="60px">
+    @elseif ($data->user_logo == '0')
+    <img src="{{ asset('images/logo_id.png') }}" alt="..." height="60px">
+    @endif
+@endforeach
+               
+
+                    @elseif (Auth::user()->role == 'admin')
+
+                    <img src="{{ asset('images/logo_id.png') }}" alt="..." height="60px">
+
+                    @elseif (Auth::user()->role == 'leader')
+                    @php
+                    $agent_id = Auth::user()->user_dep;
+                    $company_logo = DB::table('user_details')                            
+                        ->where('user_details.user_id', '=', $agent_id)
+                        ->get();
+                    @endphp
+                    @foreach ($company_logo as $data)
+                        @if ($data->user_logo != '0')
+                        <img src="{{ asset($data->user_logo) }}" alt="..." height="60px">
+                        @elseif ($data->user_logo == '0')
+                        <img src="{{ asset('images/logo_id.png') }}" alt="..." height="60px">
+                        @endif
+                    @endforeach
+                  
+
+                    @elseif (Auth::user()->role == 'user')
+
+                    <img src="{{ asset('images/logo_id.png') }}" alt="..." height="60px">
+                    @endif
+
+                    
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -75,9 +116,7 @@
                                     href="{{ route('user_index') }}"> <i class="las la-home"></i> Home</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="btn btn-sm btn-outline-secondary nav-link" aria-current="page" href="https://sso.trainingzenter.com/"> <i class="las la-address-card"></i> กลับไปหน้าหลัก</a>
-                              </li>
+                         
                               
                         @elseif (Auth::user()->role == 'company')
                             <li class="nav-item">
@@ -172,14 +211,7 @@
             });
         });
     </script>
-    <script>
-        // Initialize tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    </script>
-
+ 
 </body>
 
 </html>

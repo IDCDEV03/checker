@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>TZ Checker</title>
+    <title>E-Checker By ID Drives</title>
     
     <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,8 +29,22 @@
 
                 <a class="navbar-brand" href="#">
                     @if (Auth::user()->role == 'company')<span class="rounded p-2 mb-2 bg-warning text-dark h6"><strong>{{ Auth::user()->name }}</strong></span>              
-                    @else
-                    <img src="{{ asset('images/insee.png') }}" height="30px">
+                    @elseif (Auth::user()->role == 'leader')
+                    @php
+                    $agent_id = Auth::user()->user_dep;
+                    $company_logo = DB::table('user_details')                            
+                        ->where('user_details.user_id', '=', $agent_id)
+                        ->get();
+                    @endphp
+
+                    @foreach ($company_logo as $data)
+                    @if ($data->user_logo != '0')
+                    <img src="{{ asset($data->user_logo) }}" alt="..." height="60px">
+                    @elseif ($data->user_logo == '0')
+                    <img src="{{ asset('images/logo_id.png') }}" alt="..." height="60px">
+                    @endif
+                    @endforeach
+                  
                     @endif
                 </a>
            

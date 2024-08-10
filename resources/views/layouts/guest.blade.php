@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>TZ Checker</title>
+    <title>E-Checker By ID Drives</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round" rel="stylesheet">
@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #45474B;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/insee.png') }}" height="40px">              
+                    <img src="{{ asset('images/logo_id.png') }}" width="70px">              
                   </a>
            
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

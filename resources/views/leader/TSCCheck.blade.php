@@ -7,12 +7,17 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="text-center mb-3">
-                            <img src="{{ asset('images/insee.png') }}" class="mb-2" height="50px" alt="">
-                            <img src="{{ asset('file/logo-id.png') }}" class="mb-2" width="80px" alt="">
+@php
+$sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::user()->user_dep)->value('user_logo');
+@endphp
+                            @if ($sql_logo != '0')
+                            <img src="{{ asset($sql_logo) }}" class="mb-2" height="50px" alt="">  
+                            @endif
+                             <img src="{{ asset('file/logo-id.png') }}" class="mb-2" width="80px" alt="">
                             
                         </div>
                         @foreach ($formName as $row)
-                            <div class="text-center fs-4 mb-3">
+                            <div class="text-center fs-4 mb-3 fw-bold">
                                 {{ $row->form_name }}
                             </div>
                         @endforeach
@@ -39,7 +44,7 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-2 form-label">ทะเบียนหัว :</label>
                                 <div class="col-sm-6">
-                                <input type="text" class="form-control" id="plate_top" name="plate_top" >
+                                <input type="text" class="form-control" id="plate_top" name="plate_top" required>
                               </div>
                             </div>
 
@@ -60,7 +65,7 @@
                                 <tr>
                                     <th class="text-center" scope="col">#</th>
                                     <th class="text-center" scope="col">ข้อตรวจ</th>
-                                    <th class="text-center" scope="col" style="font-size: 0.7rem">ผลการตรวจ</th>
+                                    <th class="text-center" scope="col" style="font-size: 0.7rem" width="30%">ผลการตรวจ</th>
 
                                     <th class="text-center" style="font-size: 0.7rem">ข้อบกพร่อง</th>
                                 </tr>
@@ -73,6 +78,7 @@
                                     $a = '0';
                                 @endphp
                                 @foreach ($formPreview as $row)
+                                <input type="hidden" name="form_type" value="{{$row->form_type}}">
                                     <tr>
                                         <th colspan="5">
                                             หมวดหมู่ {{ $loop->iteration }}
@@ -124,6 +130,16 @@
                                             <input type="number" class="form-control" name="user_chk[{{ $n++ }}]" >
                                            
                                         </td>
+                                        @elseif ($row2->choice_type == '5')
+                                        <td>
+                                         <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
+
+                                         <select name="user_chk[{{ $n++ }}]" class="form-select" >
+                                            <option value="1" >ผ่าน</option>
+                                            <option value="0" >ไม่ผ่าน</option>       
+                                        </select>
+                                        
+                                     </td>
                                          
                                            @elseif ($row2->choice_type == '6')
                                            <td>
@@ -166,6 +182,15 @@
                                              <option value="0" class="text-danger">☒ ไม่ผ่าน</option>                                                      
                                          </select>
 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="2"> ผู้ตรวจสอบ </td>
+                                    <td colspan="2">
+                                     
+                                        <p> {{Auth::user()->name}}</p>
+<span>
+(............................................................)</span>
                                     </td>
                                 </tr>
                             </tbody>

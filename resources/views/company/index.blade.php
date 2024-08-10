@@ -16,7 +16,7 @@
                                         @if ($item->user_logo == '0')
                                             <img src="{{ asset('upload/no_img.jpg') }}" width="80px" alt="">
                                         @else
-                                            <img src="{{ asset($item->user_logo) }}" width="80px" alt="">
+                                            <img src="{{ asset($item->user_logo) }}" height="50px" alt="">
                                         @endif
                                     </div>
                                     <div class="col-8">

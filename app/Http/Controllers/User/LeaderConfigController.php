@@ -73,4 +73,17 @@ class LeaderConfigController extends Controller
         return view('leader.TSCCheck', ['form_id' => $form_id], compact('formPreview', 'formName'));
     }
 
+    public function TSCDetail ($round)
+    {
+
+        $form_detail = DB::table('truck_data_chks')
+        ->join('form_chks','truck_data_chks.form_chk','=','form_chks.form_id')
+        ->join('form_types','form_chks.form_type','=','form_types.id')
+        ->select('truck_data_chks.plate_top','truck_data_chks.plate_bottom','truck_data_chks.created_at','form_chks.form_name','form_types.form_type_name')
+        ->where('truck_data_chks.round_chk', '=', $round)
+        ->get();
+
+        return view('leader.TSCDetail', ['round' => $round],compact('form_detail'));
+    }
+
 }

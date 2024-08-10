@@ -149,7 +149,7 @@
                             @php
                                  $date_now = date("Y-m-d H:i:s");
                             @endphp
-                            <strong> Printed On </strong> : ระบบ Hub Training Checklist
+                            <strong> Printed On </strong> : ระบบ E-Checker
                             @php echo date("d/m/Y H:i:s", strtotime($date_now)); 
                             @endphp
                     

@@ -39,11 +39,10 @@
                                         {{$data->plate_top}}
                                   </td>
                                   <td> 
-                                    @if ($data->form_chk == 'HOLYAGPDZBCVWXE')
-                                        รถพ่วง
-                                    @elseif ($data->form_chk == 'MCJ4JWDAYP5XXGA')
-                                        รถพ่วงลากจูง
-                                    @endif
+                                    @php
+   $type_name = DB::table('form_types')->where('id', '=', $data->form_types)->value('form_type_name');;
+                                    @endphp
+                                 {{$type_name}}
                                   </td>
                                 <td align="center"> 
                                     {{$data->sum_chk}}
@@ -60,12 +59,13 @@
                                   @endif
                                 </td>
                                <td>
-                               <a class="btn btn-sm btn-primary"> <i class="las la-info-circle"></i></a> 
-                               @if ($data->sum_chk >= '3')
+                               <a href="{{route('leader_TSCDetail',['round'=>$data->round_chk])}}" class="btn btn-sm btn-primary"> <i class="las la-info-circle"></i></a> 
+                               
+                               <!--@if ($data->sum_chk >= '3')
                                    <span style="font-size: 10pt" class="text-danger">ตรวจครบแล้ว</span>
                                @else
                                <a class="btn btn-sm btn-success"><i class="las la-check"></i></a>
-                               @endif
+                               @endif-->
                               
                                </td>
                                                           

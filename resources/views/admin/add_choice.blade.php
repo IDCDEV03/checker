@@ -39,12 +39,12 @@
                                 <td><input type="text" name="addmore[0]" placeholder="ระบุข้อตรวจ" class="form-control form-control-sm" /></td>
                                 <td>
                                   <select class="form-select" name="choice_type[0]"  >
-                                    <option selected disabled>-เลือก</option>
+                                    <option disabled>-เลือก</option>
                                     <option value="1">ข้อความ</option>
                                     <option value="2">วันที่ (ค.ศ.)</option>
                                     <option value="3">วันที่ (พ.ศ.)</option>
                                     <option value="4">ตัวเลข</option>
-                                    <option value="5">ตัวเลือก (ผ่าน/ไม่ผ่าน)</option>
+                                    <option value="5" selected>ตัวเลือก (ผ่าน/ไม่ผ่าน)</option>
                                     <option value="6">ตัวเลือก (น้ำมัน/NGV)</option>
                                     <option value="7">ตัวเลือก (ประเภทสินค้า ปูนผง/ปูนเม็ด/ปูงถุง)</option>
                                   </select>
@@ -74,7 +74,7 @@
     $("#add").click(function(){   
         ++i;   
         ++n;
-        $("#dynamicTable").append('<tr><td>'+n+'</td><td><input type="text" name="addmore['+i+']" placeholder="ระบุข้อตรวจ" class="form-control form-control-sm" /></td><td>  <select class="form-select" name="choice_type['+i+']"><option selected disabled>-เลือก</option><option value="1">ข้อความ</option><option value="2">วันที่ (ค.ศ.)</option><option value="3">วันที่ (พ.ศ.)</option><option value="4">ตัวเลข</option><option value="5">ตัวเลือก (ผ่าน/ไม่ผ่าน)</option><option value="6">ตัวเลือก (น้ำมัน/NGV)</option><option value="7">ตัวเลือก (ประเภทสินค้า ปูนผง/ปูนเม็ด/ปูงถุง)</option></select></td><td><button type="button" class="btn btn-danger btn-sm remove-tr">ลบ</button></td></tr>');
+        $("#dynamicTable").append('<tr><td>'+n+'</td><td><input type="text" name="addmore['+i+']" placeholder="ระบุข้อตรวจ" class="form-control form-control-sm" /></td><td>  <select class="form-select" name="choice_type['+i+']"><option disabled>-เลือก</option><option value="1">ข้อความ</option><option value="2">วันที่ (ค.ศ.)</option><option value="3">วันที่ (พ.ศ.)</option><option value="4">ตัวเลข</option><option value="5" selected >ตัวเลือก (ผ่าน/ไม่ผ่าน)</option><option value="6">ตัวเลือก (น้ำมัน/NGV)</option><option value="7">ตัวเลือก (ประเภทสินค้า ปูนผง/ปูนเม็ด/ปูงถุง)</option></select></td><td><button type="button" class="btn btn-danger btn-sm remove-tr">ลบ</button></td></tr>');
     });
    
     $(document).on('click', '.remove-tr', function(){  
