@@ -24,16 +24,17 @@ $sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::
                         @php
                             $form_id = request()->form_id;
                             $ts_id = request()->ts;
+                            $round = request()->round;
                             $sql_car = DB::table('tran_sport_data')->where('id', '=', $ts_id)->get();
-                        @endphp
-
-                        <form action="{{ route('leader_ChkInsert', ['form_id' => request()->form_id,'ts'=>request()->ts]) }}" method="post"
-                            name="form2">
+                            $car_data = DB::table('truck_data_chks')->where('round_chk', '=', $round)->value('plate_top');
+                            @endphp
+                        <form action="{{ route('leader_chkinsert2', ['form_id' => request()->form_id,'ts'=>request()->ts]) }}" method="post"
+                            name="form2" enctype="multipart/form-data">
                             @csrf
 
 
                             <div class="mb-3 row">
-                                <label class="col-sm-6 col-form-label">บริษัทขนส่ง :
+                                <label class="col-sm-6 col-form-label fw-bold">บริษัทขนส่ง :
                                     @foreach ($sql_car as $data)
                                     {{ $data->ts_name }}
                                 @endforeach
@@ -42,32 +43,54 @@ $sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::
                             </div>
                    
                             <div class="mb-3 row">
-                                <label class="col-sm-2 form-label">ทะเบียนหัว :</label>
+                                <label class="col-sm-2 form-label fw-bold">ทะเบียนหัว :</label>
                                 <div class="col-sm-6">
-                                <input type="text" class="form-control" id="plate_top" name="plate_top" required>
+                                <input type="text" class="form-control" id="plate_top" name="plate_top" value="{{$car_data}}" readonly>
                               </div>
                             </div>
 
                             <div class="mb-3 row">
-                                <label class="col-sm-2 form-label">ทะเบียนหาง :</label>
+                                <label class="col-sm-2 form-label fw-bold">ทะเบียนหาง :</label>
                                 <div class="col-sm-6">
                                 <input type="text" class="form-control" id="plate_bottom" name="plate_bottom">
                               </div>
                             </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 form-label fw-bold">ตรวจครั้งที่ 1 วันที่:</label>
+                                <div class="col-sm-6">
+                               <span> @foreach ($sql_car as $item)
+                                  {{ Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') }}
+                               @endforeach</span>
+                                   
+                                </div>                                
+                            </div>
+                            
+                            <div class="mb-3 row">                            
+                                <div class="col-sm-6">
+                                    <span class="badge bg-primary" style="font-size: 16px">ตรวจครั้งที่  {{request()->num}} </span>
+                                </div>
+                                
+                            </div>
+
+                        
 
 
 
 
                     <div class="table-responsive">
                         <table class="table table-bordered">
-                            <caption>ตรวจเมื่อ :: {{ Carbon\Carbon::now()->format('d/m/Y H:i') }} </caption>
+                            <caption>วันที่และเวลาตรวจ :: {{ Carbon\Carbon::now()->format('d/m/Y H:i') }} </caption>
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">#</th>
                                     <th class="text-center" scope="col">ข้อตรวจ</th>
-                                    <th class="text-center" scope="col" style="font-size: 0.7rem" width="30%">ผลการตรวจ</th>
-
                                     <th class="text-center" style="font-size: 0.7rem" width="20%">ข้อบกพร่อง</th>
+                                    <th class="text-center" scope="col" style="font-size: 0.7rem" 
+                                    width="30%">ผลการตรวจ</th>
+
+                                 
+                                    <th width="20%">ภาพถ่าย</th>
                                    
                                 </tr>
                             </thead>
@@ -77,9 +100,10 @@ $sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::
                                     $i = '0';
                                     $n = '0';
                                     $a = '0';
+                                    $m = '0';
                                 @endphp
                                 @foreach ($formPreview as $row)
-                                <input type="hidden" name="form_type" value="{{$row->form_type}}">
+                                <input type="hidden" name="form_type" value="{{$row->form_types}}">
                                     <tr>
                                         <th colspan="5">
                                             หมวดหมู่ {{ $loop->iteration }}
@@ -91,49 +115,55 @@ $sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::
                                         $cate_id = $row->category_id;
                                         $sql2 = DB::table('form_choices')->where('category_id', '=', $cate_id)->get();
                                     @endphp
-                                    @foreach ($sql2 as $row2)
+                                   
                                         <tr>
                                             <td class="text-center">
                                                 {{ $loop->iteration }}
                                             </td>
 
-                                            <td>{{ $row2->form_choice }}
-                                                @if ($row2->choice_img != '0')
+                                            <td>{{ $row->form_choice }}
+                                                @if ($row->choice_img != '0')
                                                     <br>
-                                                    <img src="{{ asset('file/' . $row2->choice_img) }}" width="230px"
+                                                    <img src="{{ asset('file/' . $row->choice_img) }}" width="230px"
                                                         height="80px" alt="">
                                                 @endif
                                             </td>
-                                            @if ($row2->choice_type == '1')
                                             <td>
-                                                <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
+                                                <p class="text-danger">{{$row->choice_remark}}</p>
+                                                <input class="form-control form-control-sm" type="text"
+                                                    name="user_remark[{{ $a++ }}]" placeholder="ข้อบกพร่อง">
+                                            </td>
+
+                                            @if ($row->choice_type == '1')
+                                            <td>
+                                                <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row->id }}">
 
                                                 <input type="text" class="form-control" name="user_chk[{{ $n++ }}]" ">
                                             </td>
-                                           @elseif ($row2->choice_type == '2')
+                                           @elseif ($row->choice_type == '2')
                                            <td>
-                                               <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
+                                               <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row->id }}">
 
                                                <input type="date" class="form-control" name="user_chk[{{ $n++ }}]" ">
                                                <div id="emailHelp" class="form-text">รูปแบบวันที่ ปี ค.ศ.</div>
                                            </td>
-                                           @elseif ($row2->choice_type == '3')
+                                           @elseif ($row->choice_type == '3')
                                            <td>
-                                               <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
+                                               <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row->id }}">
 
                                                <input type="text" class="form-control"   name="user_chk[{{ $n++ }}]" maxlength="10">
                                                <div id="emailHelp" class="form-text">ระบุวันที่ วัน/เดือน/ปี พ.ศ. เช่น 11/05/2567</div>
                                            </td>
-                                           @elseif ($row2->choice_type == '4')
+                                           @elseif ($row->choice_type == '4')
                                            <td>
-                                            <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
+                                            <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row->id }}">
 
                                             <input type="number" class="form-control" name="user_chk[{{ $n++ }}]" >
                                            
                                         </td>
-                                        @elseif ($row2->choice_type == '5')
+                                        @elseif ($row->choice_type == '5')
                                         <td>
-                                         <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
+                                         <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row->id }}">
 
                                          <select name="user_chk[{{ $n++ }}]" class="form-select" >
                                             <option value="1" >ผ่าน</option>
@@ -142,9 +172,9 @@ $sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::
                                         
                                      </td>
                                          
-                                           @elseif ($row2->choice_type == '6')
+                                           @elseif ($row->choice_type == '6')
                                            <td>
-                                               <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
+                                               <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row->id }}">
 
                                                <select name="user_chk[{{ $n++ }}]" class="form-select" >
                                                     <option value="น้ำมัน" >น้ำมัน </option>
@@ -152,9 +182,9 @@ $sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::
                                                 </select>
 
                                            </td>
-                                           @elseif ($row2->choice_type == '7')
+                                           @elseif ($row->choice_type == '7')
                                            <td>
-                                               <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row2->id }}">
+                                               <input type="hidden" name="choice[{{ $i++ }}]" value="{{ $row->id }}">
 
                                                <select name="user_chk[{{ $n++ }}]" class="form-select" >
                                                     <option value="ปูนผง" >ปูนผง
@@ -166,16 +196,18 @@ $sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::
                                            </td>
                                             @endif
 
+                                         
                                             <td>
-                                                <input class="form-control form-control-sm" type="text"
-                                                    name="user_remark[{{ $a++ }}]" placeholder="ข้อบกพร่อง">
+                                                
+                                                    <input class="form-control form-control-sm" id="formFileSm" name="choice_img[{{ $m++ }}]" type="file" accept="image/*" required>
+                                             
                                             </td>
                                          
                                         </tr>
                                     @endforeach
-                                @endforeach
+                              
                                 <tr>
-                                    <td align="center" colspan="2"> สรุปผลการตรวจ </td>
+                                    <td align="center" colspan="2" class="fw-bold"> สรุปผลการตรวจ </td>
                                     <td colspan="3">
                                      
                                         <select name="final_chk"  class="form-select " >
@@ -187,7 +219,7 @@ $sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="center" colspan="2"> ผู้ตรวจสอบ </td>
+                                    <td align="center" colspan="2" class="fw-bold"> ผู้ตรวจสอบ </td>
                                     <td colspan="3">
                                      
                                         <p> {{Auth::user()->name}}</p>

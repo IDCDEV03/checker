@@ -167,6 +167,11 @@ Route::prefix('leader')->group(function(){
    Route::get('/tscchk/{form_id}/{ts}',[LeaderConfigController::class, 'TSCChk'])->name('leader_TSCChk');
 
    Route::get('/TSCDetail/{round}',[LeaderConfigController::class, 'TSCDetail'])->name('leader_TSCDetail');
+   //ตรวจครั้งที่ 2
+   Route::get('/tscchk2/{form_id}/{ts}/{round}/{num}',[LeaderConfigController::class, 'TSCChk2'])->name('leader_TSCChk2');
+   Route::post('/chkinsert2/{form_id}/{ts}',[LeaderConfigController::class, 'chkinsert2'])->name('leader_chkinsert2');
+
+   Route::get('/TSCCheckNum/{plate}/{id}',[LeaderConfigController::class, 'ListPlate_all'])->name('leader_PlateAll');
 
 })->middleware(['auth','role:leader']);
 

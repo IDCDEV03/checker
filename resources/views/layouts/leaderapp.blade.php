@@ -17,14 +17,26 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+@page {
+        size: auto;  
+        margin:.5rem 0;
+}          
+@media print {
+  #search,
+  .printPage {
+    display: none !important;    
+  }
 
+}
+</style>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('favicon.png') }}">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #45474B;">
+        <nav class="printPage navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #45474B;">
             <div class="container">
 
                 <a class="navbar-brand" href="#">
@@ -108,6 +120,7 @@
     </div>
 @include('layouts.footer')
     
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
