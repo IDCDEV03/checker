@@ -80,8 +80,9 @@
                                     <tr>
                                         <th scope="col col-1">#</th>
                                         <th scope="col col-4">ข้อตรวจ</th>
-                                        <th class="text-center col-2">ผลการตรวจ</th>
-                                        <th class="text-center col-3">ข้อบกพร่อง</th>
+                                        <th class="text-center col-2" width="20%">ผลการตรวจ</th>
+                                        <th class="text-center col-3" width="20%">ข้อบกพร่อง</th>
+                                     <th>ภาพถ่าย</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,8 +91,8 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->form_choice }}
                                             <br>
-                                        @if ($row->choice_img !== '0')
-                                            <img src="{{asset('file/'.$row->choice_img)}}" height="100px" alt="">
+                                        @if ($row->ch_img !== '0')
+                                            <img src="{{asset($row->ch_img)}}" height="100px" alt="">
                                         @endif
                                         </td>
                                         <td align="center">
@@ -111,12 +112,19 @@
                                                 {{ $row->choice_remark }}
                                             @endif
                                         </td>
+                                        <td>
+                                            @if ($row->up_img !== '0')
+                                            <img src="{{asset($row->up_img)}}" height="100px" alt="">
+                                            @else
+                                            -
+                                        @endif
+                                        </td>
                                     </tr>
                                     
                                 @endforeach
                                 <tr>
                                     <td align="center" colspan="2" class="fw-bold"> สรุปผลการตรวจ </td>
-                                    <td colspan="2" >
+                                    <td colspan="3" >
                                      @foreach ($status_chk as $data)
                                        @if ($data->status_chk == '1')
                                             ผ่าน
@@ -129,7 +137,7 @@
                                 </tr>
                                 <tr>
                                     <td align="center" colspan="2" class="fw-bold"> ผู้ตรวจสอบ </td>
-                                    <td colspan="2">
+                                    <td colspan="3">
                                      
                                         <p> {{Auth::user()->name}}</p>
 <span>
@@ -139,7 +147,7 @@
                                 </tbody>
                               <tfoot>
                                     @foreach ($form_detail as $item)
-                                        <td colspan="4" align="center">ตรวจสอบวันที่ :
+                                        <td colspan="5" align="center">ตรวจสอบวันที่ :
                                             {{ Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') }}
                                         </td>
                                     @endforeach

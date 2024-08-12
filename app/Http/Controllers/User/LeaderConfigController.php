@@ -110,7 +110,7 @@ class LeaderConfigController extends Controller
 
         $formview = DB::table('chk_records')
         ->join('form_choices','chk_records.choice_id','=','form_choices.id')
-        ->select('chk_records.choice_id','chk_records.choice_remark','chk_records.user_chk','chk_records.created_at','form_choices.form_choice','form_choices.choice_img')   
+        ->select('chk_records.choice_id','chk_records.choice_remark','chk_records.user_chk','chk_records.created_at','form_choices.form_choice','form_choices.choice_img as ch_img','chk_records.choice_img as up_img')   
         ->where('chk_records.round_chk','=',$round)   
         ->get();
 
