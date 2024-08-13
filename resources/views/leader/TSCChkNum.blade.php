@@ -60,8 +60,9 @@
                                 </td>
                                <td>
                                <a href="{{route('leader_TSCDetail',['round'=>$data->round_chk])}}" class="btn btn-sm btn-primary"> <i class="las la-info-circle"></i></a> 
-                           
-                              
+                        <a href="{{route('leader_qrcode',['round'=>$data->round_chk])}}" class="btn btn-sm btn-warning"><i class="las la-qrcode"></i> QR CODE</a>
+
+                             
                                </td>
                                                           
                               </tr>

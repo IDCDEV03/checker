@@ -8,6 +8,7 @@ use App\Http\Controllers\User\CompanyController;
 use App\Http\Controllers\CompanyConfigController;
 use App\Http\Controllers\User\LeaderController;
 use App\Http\Controllers\User\LeaderConfigController;
+use App\Http\Controllers\QRcodeGenerateController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/chkdetail/{round}', [App\Http\Controllers\ssoController::class, 'ChkDetail'])->name('ChkDetail');
 
 Auth::routes();
 Route::get('/sso/{id}/{user}/{course}/{branch}', [App\Http\Controllers\ssoController::class, 'index'])->name('sso_regis');
@@ -82,9 +84,6 @@ Route::prefix('admin')->group(function(){
     Route::get('/ConfigForm/{id}',[AdminConfigController::class, 'ConfigForm'])->name('admin_ConfigForm');
     Route::post('/InsertConfigForm/{id}',[AdminConfigController::class, 'InsertConfigForm'])->name('admin_InsertConfigForm');
     Route::delete('/UnlistForm',[AdminConfigController::class, 'UnlistForm'])->name('admin_UnlistForm');
-
-
-
 
 
 })->middleware(['auth','role:admin']);
@@ -167,14 +166,21 @@ Route::prefix('leader')->group(function(){
    Route::get('/tscchk/{form_id}/{ts}',[LeaderConfigController::class, 'TSCChk'])->name('leader_TSCChk');
 
    Route::get('/TSCDetail/{round}',[LeaderConfigController::class, 'TSCDetail'])->name('leader_TSCDetail');
+
    //ตรวจครั้งที่ 2
    Route::get('/tscchk2/{form_id}/{ts}/{round}/{num}',[LeaderConfigController::class, 'TSCChk2'])->name('leader_TSCChk2');
    Route::post('/chkinsert2/{form_id}/{ts}',[LeaderConfigController::class, 'chkinsert2'])->name('leader_chkinsert2');
 
    Route::get('/TSCCheckNum/{plate}/{id}',[LeaderConfigController::class, 'ListPlate_all'])->name('leader_PlateAll');
 
+   //qrcode
+   Route::get('/qrcode/{round}', [QRcodeGenerateController::class,'qrcode'])->name('leader_qrcode');
+
 })->middleware(['auth','role:leader']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/printpreview/{round}/{type}',[App\Http\Controllers\HomeController::class, 'preview_print'])->name('printpreview');  
+
+Route::get('/printpreview/{round}/{type}',[App\Http\Controllers\HomeController::class, 'preview_print'])->name('printpreview'); 
+
+
 

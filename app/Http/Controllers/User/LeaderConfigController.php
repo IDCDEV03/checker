@@ -9,7 +9,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
 use function Laravel\Prompts\select;
 
 class LeaderConfigController extends Controller
@@ -149,7 +148,7 @@ class LeaderConfigController extends Controller
             $choice_id = $input['choice'][$key];
             $fileOriginalName = $choice_img->getClientOriginalExtension();
             $fileNewName = $form_id.'_'.$choice_id.'_'.time() .'.'. $fileOriginalName;
-            $upload_location = 'upload/';
+            $upload_location = 'upload/truckchk/';
             $full_path = $upload_location . $fileNewName;
 
             $choice_img->move($upload_location, $fileNewName);
