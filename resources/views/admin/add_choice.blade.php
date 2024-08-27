@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">เพิ่มข้อตรวจ</div>
 
@@ -20,15 +20,15 @@
                           </div>
                           
 
-                    <form method="POST" action="{{route('admin_InsertChoice',['id'=>request()->id])}}">
-                            @csrf
+            <form method="POST" action="{{route('admin_InsertChoice',['id'=>request()->id])}}">
+             @csrf
                     
                         <input type="hidden" name="form_id" value="{{$row->form_id}}">
                         <table class="table table-bordered" id="dynamicTable">
                             <thead>
                               <tr>
                                 <th>ที่</th>
-                                <th scope="col" width="40%">ข้อตรวจ</th>
+                                <th scope="col" width="50%">ข้อตรวจ</th>
                                 <th width="30%">ประเภทตัวเลือก</th>
                                 <th scope="col">เพิ่ม/ลบ</th>
                               </tr>

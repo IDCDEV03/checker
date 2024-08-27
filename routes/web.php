@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminConfigController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\CompanyController;
+use App\Http\Controllers\User\CompanyReportController;
 use App\Http\Controllers\CompanyConfigController;
 use App\Http\Controllers\User\LeaderController;
 use App\Http\Controllers\User\LeaderConfigController;
@@ -143,6 +144,19 @@ Route::prefix('company')->group(function(){
    Route::get('/ListPlate/{id}',[CompanyConfigController::class, 'ListPlate'])->name('company_ListPlate');
 
    Route::get('/TransportTypeChk/{id}/{ts}',[CompanyConfigController::class, 'TypeChk'])->name('company_TypeChk');
+
+   //รถขนส่ง
+   Route::get('/newtruck/{id}',[CompanyConfigController::class, 'NewTruck'])->name('company_newtruck');
+   Route::post('/inserttruck/{ts}',[CompanyConfigController::class, 'InsertTruck'])->name('company_inserttruck');
+   Route::get('/detailtruck/{id}',[CompanyConfigController::class, 'DetailTruck'])->name('company_detailtruck');
+
+   Route::get('/newtruck2',[CompanyConfigController::class, 'NewTruck2'])->name('company_newtruck2');
+
+   Route::post('/inserttruck2',[CompanyConfigController::class, 'InsertTruck2'])->name('company_inserttruck2');
+
+   //สรุปรายงาน
+   Route::get('/reportlist/{form}',[CompanyReportController::class, 'ReportList'])->name('company_reportlist');
+  
 
 })->middleware(['auth','role:company']);
 

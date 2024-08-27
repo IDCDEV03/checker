@@ -85,4 +85,8 @@ class HomeController extends Controller
 
        return view('preview_form_print',['round'=>$round],compact('formview','formchk_date','car_data','formName'));
     }
+
+
+  
+
 }

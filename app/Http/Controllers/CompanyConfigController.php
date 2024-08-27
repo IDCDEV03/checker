@@ -88,7 +88,9 @@ class CompanyConfigController extends Controller
     {
 
         $ts_detail = DB::table('tran_sport_data')
-        ->where('id', '=', $id)
+        ->leftJoin('truck_data', 'tran_sport_data.id' ,'=','truck_data.transport_id')
+        ->leftJoin('form_types','truck_data.truck_type', '=','form_types.id')
+        ->where('tran_sport_data.id', '=', $id)
         ->get();
 
         return view('company.TransportPlateList',['id'=>$id], compact('ts_detail'));
@@ -105,5 +107,99 @@ class CompanyConfigController extends Controller
         return view('company.TransportTypeChk',['id'=>$id,'ts'=>$ts], compact('form_list'));
     }
 
+    //ข้อมูลรถลงบริษัทขนส่ง
+    public function NewTruck($id)
+    {
+
+        $transport_company = DB::table('tran_sport_data')
+        ->where('id','=',$id)
+        ->get();
+
+        $truck_type = DB::table('form_types')
+        ->orderBy('form_type_name','ASC')
+        ->get();
+
+        return view('company.TC_Create',['id'=>$id],compact('transport_company','truck_type'));
+
+    }
+
+    public function NewTruck2()
+    {
+
+        $transport_company = DB::table('tran_sport_data')
+        ->orderBy('ts_name','ASC')
+        ->get();
+
+        $truck_type = DB::table('form_types')
+        ->orderBy('form_type_name','ASC')
+        ->get();
+
+        return view('company.TC_Create2',compact('transport_company','truck_type'));
+
+    }
+
+    public function InsertTruck(Request $request,$ts)
+    {
+        DB::table('truck_data')
+        ->insert([
+        'truck_id' => $request->truck_id,
+        'transport_id' => $request->transport_id,
+        'plate_top' => $request->plate_top,
+        'plate_bottom' => $request->plate_bottom,
+        'truck_type' => $request->truck_type,
+        'date_truck_enroll' => $request->date_truck_enroll,
+        'weight_max' => $request->weight_max,
+        'weight_all' => $request->weight_all,
+        'truck_insure_expired' => $request->truck_insure_expired,
+        'truck_tax_expired' => $request->truck_tax_expired,
+        'truck_product' => $request->truck_product,
+        'truck_fuel' => $request->truck_fuel,
+        'status_truck' => '1',
+        'created_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('company_ListPlate',['id'=>$ts])->with('success','บันทึกเรียบร้อยแล้ว');
+
+    }
+    
+    public function DetailTruck($id)
+    {
+        $detail_truck = DB::table('truck_data')
+        ->select('plate_top','plate_bottom','date_truck_enroll','weight_all','weight_max','truck_tax_expired','truck_insure_expired','truck_fuel','ts_name','form_type_name','truck_product.truck_product')
+        ->join('tran_sport_data','truck_data.transport_id','=','tran_sport_data.id')
+        ->join('form_types','truck_data.truck_type','=','form_types.id')
+        ->join('truck_product','truck_data.truck_product','=','truck_product.rec_id')
+        ->where('truck_data.truck_id','=',$id)
+        ->get();
+
+        return view('company.ViewTruck',['id'=>$id],compact('detail_truck'));
+    }
+
+
+ public function InsertTruck2(Request $request)
+    {
+        $ts = $request->transport_id;
+        DB::table('truck_data')
+        ->insert([
+        'truck_id' => $request->truck_id,
+        'transport_id' => $request->transport_id,
+        'plate_top' => $request->plate_top,
+        'plate_bottom' => $request->plate_bottom,
+        'truck_type' => $request->truck_type,
+        'date_truck_enroll' => $request->date_truck_enroll,
+        'weight_max' => $request->weight_max,
+        'weight_all' => $request->weight_all,
+        'truck_insure_expired' => $request->truck_insure_expired,
+        'truck_tax_expired' => $request->truck_tax_expired,
+        'truck_product' => $request->truck_product,
+        'truck_fuel' => $request->truck_fuel,
+        'status_truck' => '1',
+        'created_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('company_ListPlate',['id'=>$ts])->with('success','บันทึกเรียบร้อยแล้ว');
+
+    }
+    
     
 }

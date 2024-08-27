@@ -101,7 +101,7 @@ $sql_logo = DB::table('user_details')->where('user_details.user_id', '=', Auth::
                                                 @if ($row2->choice_img != '0')
                                                     <br>
                                                     <img src="{{ asset('file/' . $row2->choice_img) }}" width="230px"
-                                                        height="80px" alt="">
+                                                        height="120px" alt="">
                                                 @endif
                                             </td>
                                             @if ($row2->choice_type == '1')

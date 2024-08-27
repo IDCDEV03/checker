@@ -91,7 +91,7 @@
                                         @foreach ($form_list as $item)
                                         
                                       <li class="list-group-item">
-                                        <a href="{{route('company_listchkform',['form_id'=>$item->form_id])}}" class="btn btn-sm btn-outline-secondary">
+                                        <a href="{{route('company_reportlist',['form'=>$item->form_id])}}" class="btn btn-sm btn-outline-secondary">
                                         {{$item->form_name}}</a>
                                     </li>
                                            

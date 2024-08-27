@@ -10,6 +10,7 @@
                 </div>
                     <div class="card-body">
 <p>
+  <a class="btn btn-outline-secondary" href="{{route('company_newtruck2')}}" role="button">เพิ่มรถ</a>
     <a class="btn btn-outline-success" href="{{route('company_TransportCreate')}}" role="button">เพิ่มบริษัทใหม่</a>
 </p>
 

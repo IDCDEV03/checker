@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">บริษัทขนส่ง
                     
@@ -16,7 +16,7 @@
                         </p>
                         <hr>
 <p>
-    <a class="btn btn-sm btn-outline-secondary" href="{{route('company_TransportCreate')}}" role="button">เพิ่มรถ</a>
+    <a class="btn btn-sm btn-outline-secondary" href="{{route('company_newtruck',['id'=>request()->id])}}" role="button">เพิ่มรถ</a>
 
     <a class="btn btn-sm btn-outline-primary" href="{{route('company_TypeChk',['id'=>Auth::user()->user_id,'ts'=>request()->id])}}" role="button">ตรวจรถ</a>
 </p>
@@ -25,24 +25,29 @@
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
-                                <th width="30%">ชื่อบริษัทขนส่ง</th>
-                                <th>ที่อยู่</th>
+                                <th width="30%">ทะเบียนหัว</th>
+                                <th>ทะเบียนหาง</th>
+                                <th>ชนิดรถ</th>
                                 <th scope="col">วันที่เพิ่ม</th>
                                 <th scope="col">ตั้งค่า</th>
                               </tr>
                             </thead>
                             <tbody>
-                               
+                              @foreach ($ts_detail as $data)
                               <tr>
-                                <th scope="row"></th>
+                                <th scope="row">{{ $loop->iteration }}</th>
                                    <td>
-                                        <a href="">
-                                        
+                                        <a href="{{route('company_detailtruck',['id'=>$data->truck_id])}}">
+                                        {{$data->plate_top}}
                                         </a>
                                   </td>
+                                  
+                                  <td>                                    
+                                    {{$data->plate_bottom}}                                   
+                              </td>
 
                                 <td> 
-                                    
+                                  {{$data->form_type_name}}
                                 </td>
                                 
                                 <td>
@@ -56,7 +61,7 @@
                                                                        
                                 </td>                             
                               </tr>
-                           
+                           @endforeach
                               
                              
                             </tbody>
