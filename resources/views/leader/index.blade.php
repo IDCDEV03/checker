@@ -58,7 +58,42 @@
                                 </div>
                             </div>
 
-                            <!---<div class="accordion-item">
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                        aria-controls="flush-collapseTwo">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ asset('images/plate.png') }}" alt=""
+                                                style="width: 45px; height: 45px" />
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1">รายการทะเบียนรถ</p>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                    aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                      <ul class="list-group list-group-flush">
+                                       
+                                      <li class="list-group-item">
+                                        <a href="{{route('leader_listplatetotal')}}" class="btn btn-sm btn-outline-secondary">
+                                        ทะเบียนรถทั้งหมด</a>
+                                      </li>  
+                                      
+                                      <li class="list-group-item">
+                                        <a href="{{route('leader_reportall')}}" class="btn btn-sm btn-outline-primary">
+                                        สรุปรายการตรวจเช็ค</a>
+                                      </li>    
+                                      
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                           <!-- <div class="accordion-item">
                                 <h2 class="accordion-header" id="flush-headingOne">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#flush-collapseOne" aria-expanded="false"

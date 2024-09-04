@@ -39,9 +39,7 @@
         </div>
 
         <div class="row mb-3">
-                <label class="col-md-4 col-form-label text-md-end">ทะเบียนหาง
-                    
-                </label>                       
+                <label class="col-md-4 col-form-label text-md-end">ทะเบียนหาง </label>                       
                 <div class="col-md-6">
                     <input type="text" class="form-control" name="plate_bottom" maxlength="9">
                 </div>                          

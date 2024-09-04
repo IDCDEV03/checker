@@ -154,6 +154,8 @@ Route::prefix('company')->group(function(){
 
    Route::post('/inserttruck2',[CompanyConfigController::class, 'InsertTruck2'])->name('company_inserttruck2');
 
+   Route::get('/trucklist',[CompanyConfigController::class, 'TruckList'])->name('company_trucklist');
+   
    //สรุปรายงาน
    Route::get('/reportlist/{form}',[CompanyReportController::class, 'ReportList'])->name('company_reportlist');
   
@@ -185,7 +187,24 @@ Route::prefix('leader')->group(function(){
    Route::get('/tscchk2/{form_id}/{ts}/{round}/{num}',[LeaderConfigController::class, 'TSCChk2'])->name('leader_TSCChk2');
    Route::post('/chkinsert2/{form_id}/{ts}',[LeaderConfigController::class, 'chkinsert2'])->name('leader_chkinsert2');
 
-   Route::get('/TSCCheckNum/{plate}/{id}',[LeaderConfigController::class, 'ListPlate_all'])->name('leader_PlateAll');
+   Route::get('/TSCCheckNum/{plate}',[LeaderConfigController::class, 'ListPlate_all'])->name('leader_PlateAll');
+
+   //ตรวจรถ v.2 เลือกทะเบียนก่อน
+   Route::get('/platetotal',[LeaderConfigController::class, 'ListPlateTotal'])->name('leader_listplatetotal');
+   Route::get('/TruckChkS1/{id}',[LeaderConfigController::class, 'TruckChkS1'])->name('leader_truckchks1');
+
+   Route::POST('/ChkPart1/{truckid}',[LeaderConfigController::class, 'ChkPart1'])->name('leader_ChkPart1');
+
+   Route::get('/TruckChkS2/{id}/{round}/{form}/{category_id}/{num}',[LeaderConfigController::class, 'TruckChkS2'])->name('leader_truckchks2');
+
+   Route::POST('/TruckInsert2',[LeaderConfigController::class, 'TruckInsert2'])->name('leader_TruckInsert2');
+
+   Route::get('/TruckChkS3/{round}/',[LeaderConfigController::class, 'TruckChkS3'])->name('leader_truckchks3');
+
+   Route::POST('/TruckInsert3',[LeaderConfigController::class, 'TruckInsert3'])->name('leader_TruckInsert3');
+
+   //รายงานตรวจรถ
+   Route::get('/reportall',[LeaderController::class, 'ReportAllPlate'])->name('leader_reportall');
 
    //qrcode
    Route::get('/qrcode/{round}', [QRcodeGenerateController::class,'qrcode'])->name('leader_qrcode');

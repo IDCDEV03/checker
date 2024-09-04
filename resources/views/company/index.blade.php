@@ -39,7 +39,7 @@
                                             <img src="{{ asset('images/truck.png') }}" alt=""
                                                 style="width: 45px; height: 45px" />
                                             <div class="ms-3">
-                                                <p class="fw-bold mb-1">บริษัทผู้ขนส่ง</p>
+                                                <p class="fw-bold mb-1">บริษัทผู้ขนส่ง/ทะเบียนรถ</p>
                                             </div>
                                         </div>
                                     </button>
@@ -54,13 +54,17 @@
                                             
                                           <li class="list-group-item">
                                             <a href="{{route('company_TransportList',['id'=>Auth::user()->user_id])}}" class="btn btn-sm btn-outline-primary">
-                                            รายชื่อบริษัท</a>
+                                            รายชื่อบริษัท</a>  
+                                             <a href="{{route('company_TransportCreate')}}" class="btn btn-sm btn-outline-success">
+                                                เพิ่มบริษัทใหม่</a>
                                         </li>
                                         <li class="list-group-item">
-                                            <a href="{{route('company_TransportCreate')}}" class="btn btn-sm btn-outline-success">
-                                            เพิ่มบริษัทใหม่</a>
+                                            <a href="{{route('company_trucklist')}}" class="btn btn-sm btn-primary">
+                                                รายการทะเบียนรถ</a>
+                                                <a href="{{route('company_newtruck2')}}" class="btn btn-sm btn-success">
+                                                    เพิ่มรถใหม่</a>
                                         </li>
-                                               
+                                       
                                           
                                             </ul>
 

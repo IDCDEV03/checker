@@ -200,6 +200,16 @@ class CompanyConfigController extends Controller
         return redirect()->route('company_ListPlate',['id'=>$ts])->with('success','บันทึกเรียบร้อยแล้ว');
 
     }
+
+    public function TruckList()
+    {
+        $truck_data = DB::table('truck_data')
+        ->join('tran_sport_data','truck_data.transport_id','=','tran_sport_data.id')
+        ->orderBy('truck_data.plate_top','ASC')
+        ->get();
+
+        return view('company.TruckList',compact('truck_data'));
+    }
     
     
 }

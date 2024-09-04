@@ -178,4 +178,9 @@ class LeaderController extends Controller
 
         return view('leader.DetailChk', ['round' => $round, 'type' => $type], compact('formview', 'formchk_date', 'formName', 'DetailData'));
     }
+
+    public function ReportAllPlate ()
+    {
+        return view('leader.Report_AllPlate');
+    }
 }
