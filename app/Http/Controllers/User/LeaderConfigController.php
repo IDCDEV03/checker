@@ -168,18 +168,18 @@ class LeaderConfigController extends Controller
         return redirect()->route('leader_Plate', ['id'=>$ts])->with('success', 'บันทึกข้อมูลสำเร็จ');
     }
 
-    public function ListPlate_all ($plate)
+    public function ListPlate_all ($plate,$id)
     {
-        $chk_truck = DB::table('truck_data')
-        ->where('truck_id', '=', $plate)
+        $chk_truck = DB::table('truck_data_chks')
+        ->where('plate_top', '=', $plate)
         ->orderBy('id', 'ASC')
         ->get();
              
-        //$ts_detail = DB::table('tran_sport_data')
-        //->where('id', '=', $id)
-        //->get();
+        $ts_detail = DB::table('tran_sport_data')
+        ->where('id', '=', $id)
+        ->get();
  
-      return view('leader.TSCChkNum', ['plate' => $plate],compact('chk_truck'));
+      return view('leader.TSCChkNum', ['plate' => $plate],compact('chk_truck','ts_detail'));
     }
 
     public function ListPlateTotal ()
@@ -192,7 +192,7 @@ class LeaderConfigController extends Controller
         return view('leader.ListPlate',compact('truck_data'));
     }
 
-    public function TruckChkS1 ($id)
+    public function TruckChkS1 ($id,$no)
     {
         $Chk_part1 = DB::table('truck_data')
         ->select('plate_top','ts_name','plate_bottom','form_name','form_id','truck_data.transport_id')
@@ -404,6 +404,8 @@ class LeaderConfigController extends Controller
 
         return redirect()->route('leader_listplatetotal')->with('success', 'ตรวจรถสำเร็จ');
     }
+
+  
 
 
 }

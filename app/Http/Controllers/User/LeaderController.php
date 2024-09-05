@@ -181,6 +181,21 @@ class LeaderController extends Controller
 
     public function ReportAllPlate ()
     {
-        return view('leader.Report_AllPlate');
+        $chk_truck = DB::table('chk_truck_part2s')
+        ->select('chk_truck_part2s.truck_id','plate_top','plate_bottom','chk_result','date_chk','chk_truck_part2s.round_id')
+        ->join('truck_data','chk_truck_part2s.truck_id','=','truck_data.truck_id')
+        ->orderBy('chk_truck_part2s.created_at','DESC')
+        ->get();
+
+        return view('leader.Report_AllPlate',compact('chk_truck'));
+    }
+    
+    public function TruckChkDetail1($round,$truck)
+    {
+      
+
+      
+
+        return view('leader.TruckChkDetail', ['round' => $round,'truck'=>$truck],compact('form_detail','formview'));
     }
 }

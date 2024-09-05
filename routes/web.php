@@ -187,11 +187,11 @@ Route::prefix('leader')->group(function(){
    Route::get('/tscchk2/{form_id}/{ts}/{round}/{num}',[LeaderConfigController::class, 'TSCChk2'])->name('leader_TSCChk2');
    Route::post('/chkinsert2/{form_id}/{ts}',[LeaderConfigController::class, 'chkinsert2'])->name('leader_chkinsert2');
 
-   Route::get('/TSCCheckNum/{plate}',[LeaderConfigController::class, 'ListPlate_all'])->name('leader_PlateAll');
+   Route::get('/TSCCheckNum/{plate}/{id}',[LeaderConfigController::class, 'ListPlate_all'])->name('leader_PlateAll');
 
    //ตรวจรถ v.2 เลือกทะเบียนก่อน
    Route::get('/platetotal',[LeaderConfigController::class, 'ListPlateTotal'])->name('leader_listplatetotal');
-   Route::get('/TruckChkS1/{id}',[LeaderConfigController::class, 'TruckChkS1'])->name('leader_truckchks1');
+   Route::get('/TruckChkS1/{id}/{no}',[LeaderConfigController::class, 'TruckChkS1'])->name('leader_truckchks1');
 
    Route::POST('/ChkPart1/{truckid}',[LeaderConfigController::class, 'ChkPart1'])->name('leader_ChkPart1');
 
@@ -205,6 +205,9 @@ Route::prefix('leader')->group(function(){
 
    //รายงานตรวจรถ
    Route::get('/reportall',[LeaderController::class, 'ReportAllPlate'])->name('leader_reportall');
+
+   Route::get('/truckdetail1/{round}/{truck}',[LeaderController::class, 'TruckChkDetail1'])->name('leader_TruckChkDetail1');
+
 
    //qrcode
    Route::get('/qrcode/{round}', [QRcodeGenerateController::class,'qrcode'])->name('leader_qrcode');
