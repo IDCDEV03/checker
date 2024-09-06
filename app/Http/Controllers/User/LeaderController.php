@@ -192,10 +192,18 @@ class LeaderController extends Controller
     
     public function TruckChkDetail1($round,$truck)
     {
-      
+        
+        $detail_part1 = DB::table('chk_truck_part1s')
+        ->select('chk_truck_part1s.transport_id','chk_truck_part1s.truck_id','chk_truck_part1s.form_id','plate_top','plate_bottom','ts_name','form_type_name','chk_round','form_name','img_1','img_2','img_3','img_4','img_5','img_6','img_7','img_8')
+        ->join('truck_data','chk_truck_part1s.truck_id','=','truck_data.truck_id')
+        ->join('form_chks' , 'chk_truck_part1s.form_id', '=', 'form_chks.form_id')
+        ->join('tran_sport_data', 'chk_truck_part1s.transport_id', '=', 'tran_sport_data.id')
+        ->join('form_types' , 'truck_data.truck_type', '=', 'form_types.id')
+        ->where('chk_truck_part1s.round_id','=',$round)
+        ->first();
 
       
 
-        return view('leader.TruckChkDetail', ['round' => $round,'truck'=>$truck],compact('form_detail','formview'));
+        return view('leader.TruckChkDetail1', ['round' => $round,'truck'=>$truck],compact('detail_part1'));
     }
 }
