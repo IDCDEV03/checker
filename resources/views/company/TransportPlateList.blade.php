@@ -9,11 +9,9 @@
                     
                 </div>
                     <div class="card-body">
-                        <p class="h4">
-                            @foreach ($ts_detail as $row)
-                                {{$row->ts_name}} ({{$row->ts_province}})
-                            @endforeach
-                        </p>
+                        <p class="h4">                           
+                                {{$ts_detail[0]->ts_name}} ({{$ts_detail[0]->ts_province}})
+                       </p>
                         <hr>
 <p>
     <a class="btn btn-sm btn-outline-secondary" href="{{route('company_newtruck',['id'=>request()->id])}}" role="button">เพิ่มรถ</a>
