@@ -29,7 +29,7 @@
                               <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                    <td>                                   
-                                    <a href="{{route('company_ListPlate',['id'=>$item->id])}}">
+                                    <a class="text-decoration-none" href="{{route('company_ListPlate',['id'=>$item->id])}}" >
                                         {{$item->ts_name}}
                                         </a>
                                   </td>
