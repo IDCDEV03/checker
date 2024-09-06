@@ -37,9 +37,8 @@
                               <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                    <td>
-                                        <a href="{{route('company_detailtruck',['id'=>$data->truck_id])}}">
                                         {{$data->plate_top}}
-                                        </a>
+                                     
                                   </td>
                                   
                                   <td>                                    

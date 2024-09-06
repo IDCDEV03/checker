@@ -28,11 +28,10 @@
                                 @foreach ($ts_detail as $item)
                               <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                   <td>
-                                    {{$item->ts_name}}
-                                        <!--<a href="{{route('company_ListPlate',['id'=>$item->id])}}">
+                                   <td>                                   
+                                    <a href="{{route('company_ListPlate',['id'=>$item->id])}}">
                                         {{$item->ts_name}}
-                                        </a>-->
+                                        </a>
                                   </td>
 
                                 <td> 
