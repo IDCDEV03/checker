@@ -88,6 +88,7 @@ class CompanyConfigController extends Controller
     {
 
         $ts_detail = DB::table('tran_sport_data')
+        ->select('ts_name','ts_province','plate_top','plate_bottom','form_type_name','truck_data.created_at','truck_data.truck_id')
         ->leftJoin('truck_data', 'tran_sport_data.id' ,'=','truck_data.transport_id')
         ->leftJoin('form_types','truck_data.truck_type', '=','form_types.id')
         ->where('tran_sport_data.id', '=', $id)

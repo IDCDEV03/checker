@@ -35,8 +35,9 @@
                               <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                    <td>
-                                        {{$data->plate_top}}
-                                     
+                                      <a href="{{route('company_detailtruck',['id'=>$data->truck_id])}}">
+                                          {{$data->plate_top}}
+                                        </a>                                     
                                   </td>
                                   
                                   <td>                                    
@@ -48,14 +49,11 @@
                                 </td>
                                 
                                 <td>
-                                   
+                                  {{ Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}
                                 </td>
                                
                                 <td> 
-                                   
-                                        
-                                       
-                                                                       
+                                   ลบ                                 
                                 </td>                             
                               </tr>
                            @endforeach

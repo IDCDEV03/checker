@@ -48,7 +48,9 @@
                     @if ($detail_part1->img_1 == '0')
                         <img class="img-thumbnail" src="{{ asset('upload/no_img.jpg') }}" width="100px" height="100px">
                     @else
+                    <a href="{{ asset('upload/truckchk/' . $detail_part1->img_1)}}" data-lightbox="{{$detail_part1->img_1}}" >
                         <img class="img-thumbnail" src="{{ asset('upload/truckchk/' . $detail_part1->img_1) }}" width="100%">
+                    </a>
                     @endif
 
                 </td>
@@ -57,7 +59,9 @@
                     @if ($detail_part1->img_2 == '0')
                         <img class="img-thumbnail" src="{{ asset('upload/no_img.jpg') }}" width="100px" height="100px">
                     @else
+                    <a href="{{ asset('upload/truckchk/' . $detail_part1->img_2)}}" data-lightbox="{{$detail_part1->img_2}}" >
                         <img class="img-thumbnail" src="{{ asset('upload/truckchk/' . $detail_part1->img_2) }}" width="100%">
+                    </a>
                     @endif
                 </td>
                 <td>ภาพที่ 3
@@ -65,7 +69,9 @@
                     @if ($detail_part1->img_3 == '0')
                         <img class="img-thumbnail" src="{{ asset('upload/no_img.jpg') }}" width="100px" height="100px">
                     @else
+                    <a href="{{ asset('upload/truckchk/' . $detail_part1->img_3)}}" data-lightbox="{{$detail_part1->img_3}}" >
                         <img class="img-thumbnail" src="{{ asset('upload/truckchk/' . $detail_part1->img_3) }}" width="100%">
+                    </a>
                     @endif
                 </td>
                 <td>ภาพที่ 4
@@ -73,11 +79,11 @@
                     @if ($detail_part1->img_4 == '0')
                         <img class="img-thumbnail" src="{{ asset('upload/no_img.jpg') }}" width="100px" height="100px">
                     @else
+                    <a href="{{ asset('upload/truckchk/' . $detail_part1->img_4)}}" data-lightbox="{{$detail_part1->img_4}}" >
                         <img class="img-thumbnail" src="{{ asset('upload/truckchk/' . $detail_part1->img_4) }}" width="100%">
+                    </a>
                     @endif
                 </td>
-
-
             </tr>
 
             <tr>
@@ -86,7 +92,9 @@
                     @if ($detail_part1->img_5 == '0')
                         <img class="img-thumbnail" src="{{ asset('upload/no_img.jpg') }}" width="100px" height="100px">
                     @else
+                    <a href="{{ asset('upload/truckchk/' . $detail_part1->img_5)}}" data-lightbox="{{$detail_part1->img_5}}" >
                         <img class="img-thumbnail" src="{{ asset('upload/truckchk/' . $detail_part1->img_5) }}" width="100%">
+                    </a>
                     @endif
                 </td>
                 <td>ภาพที่ 6
@@ -94,7 +102,9 @@
                     @if ($detail_part1->img_6 == '0')
                         <img class="img-thumbnail" src="{{ asset('upload/no_img.jpg') }}" width="100px" height="100px">
                     @else
+                    <a href="{{ asset('upload/truckchk/' . $detail_part1->img_6)}}" data-lightbox="{{$detail_part1->img_6}}" >
                         <img class="img-thumbnail" src="{{ asset('upload/truckchk/' . $detail_part1->img_6) }}" width="100%">
+                    </a>
                     @endif
                 </td>
                 <td>ภาพที่ 7
@@ -102,7 +112,9 @@
                     @if ($detail_part1->img_7 == '0')
                         <img class="img-thumbnail" src="{{ asset('upload/no_img.jpg') }}" width="100px" height="100px">
                     @else
+                    <a href="{{ asset('upload/truckchk/' . $detail_part1->img_7)}}" data-lightbox="{{$detail_part1->img_7}}" >
                         <img class="img-thumbnail" src="{{ asset('upload/truckchk/' . $detail_part1->img_7) }}" width="100%">
+                    </a>
                     @endif
                 </td>
                 <td>ภาพที่ 8
@@ -110,7 +122,9 @@
                     @if ($detail_part1->img_8 == '0')
                         <img class="img-thumbnail" src="{{ asset('upload/no_img.jpg') }}" width="100px" height="100px">
                     @else
+                    <a href="{{ asset('upload/truckchk/' . $detail_part1->img_8)}}" data-lightbox="{{$detail_part1->img_8}}" >
                         <img class="img-thumbnail" src="{{ asset('upload/truckchk/' . $detail_part1->img_8) }}" width="100%">
+                    </a>
                     @endif
                 </td>
             </tr>
@@ -119,7 +133,7 @@
         </tbody>
     </table>
     <div class="d-grid gap-2 col-6 mx-auto">
-    <a href="" class="btn btn-success">ถัดไป <i class="las la-angle-double-right"></i></a>
+    <a href="#" class="btn btn-success">ถัดไป <i class="las la-angle-double-right"></i></a>
     </div>
                     </div>
                 </div>
