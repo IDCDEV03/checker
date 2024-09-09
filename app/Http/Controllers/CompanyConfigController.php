@@ -141,12 +141,21 @@ class CompanyConfigController extends Controller
 
     public function InsertTruck(Request $request,$ts)
     {
+
+        if($request->plate_bottom == "")
+        {
+            $plate_bottom = '-';
+        }else
+        {
+            $plate_bottom = $request->plate_bottom;
+        }
+
         DB::table('truck_data')
         ->insert([
         'truck_id' => $request->truck_id,
         'transport_id' => $request->transport_id,
         'plate_top' => $request->plate_top,
-        'plate_bottom' => $request->plate_bottom,
+        'plate_bottom' => $plate_bottom,
         'truck_type' => $request->truck_type,
         'date_truck_enroll' => $request->date_truck_enroll,
         'weight_max' => $request->weight_max,
@@ -180,12 +189,21 @@ class CompanyConfigController extends Controller
  public function InsertTruck2(Request $request)
     {
         $ts = $request->transport_id;
+
+        if($request->plate_bottom == "")
+        {
+            $plate_bottom = '-';
+        }else
+        {
+            $plate_bottom = $request->plate_bottom;
+        }
+
         DB::table('truck_data')
         ->insert([
         'truck_id' => $request->truck_id,
         'transport_id' => $request->transport_id,
         'plate_top' => $request->plate_top,
-        'plate_bottom' => $request->plate_bottom,
+        'plate_bottom' => $plate_bottom,
         'truck_type' => $request->truck_type,
         'date_truck_enroll' => $request->date_truck_enroll,
         'weight_max' => $request->weight_max,
